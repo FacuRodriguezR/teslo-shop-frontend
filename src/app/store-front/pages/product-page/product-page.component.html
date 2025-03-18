@@ -1,0 +1,43 @@
+@if( productResource.isLoading() ) {
+    <div class="flex justify-center items-center h-screen">
+      <span class="loading loading-spinner loading-lg"></span>
+    </div>
+    }
+    
+    <!-- Producto -->
+    @if( productResource.hasValue() ) {
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 p-4 animate-fadeIn">
+      <!-- Imágenes -->
+      <product-carousel [images]="productResource.value().images" />
+    
+      <!--  -->
+      <div class="text-center">
+        <h2 class="text-2xl font-bold font-montserrat">
+          {{ productResource.value().title }}
+        </h2>
+        <div class="divider"></div>
+    
+        <p>
+          {{ productResource.value().description }}
+        </p>
+
+        <div>
+          <div class="card-actions justify-end mt-5">
+            @for (item of productResource.value().sizes; track $index) {
+
+              <div class="badge badge-outline">{{item}}</div>
+            }
+          </div>
+          <div class="card-actions justify-end mt-5">
+            
+            <div class="badge badge-secondary text-right font-montserrat text-bold">{{productResource.value().gender | uppercase}}</div>
+          </div>
+          <div class="text-accent text-right mt-5 text-4xl font-montserrat">
+            <p>${{productResource.value().price}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    }
