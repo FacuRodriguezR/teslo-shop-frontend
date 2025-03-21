@@ -18,6 +18,7 @@ export class ProductServiceService {
     private http = inject(HttpClient);
 
     private productsCache = new Map<string,ProductsResponse>();
+    
     private productCache = new Map<string,Product>();
 
     getProducts(options: Options): Observable<ProductsResponse>{
@@ -32,22 +33,19 @@ export class ProductServiceService {
             )
         }
 
-
         return this.http
           .get<ProductsResponse>(`${baseUrl}/products`, {
             params: {
                 limit: limit,
                 offset: offset,
                 gender: gender
-
             }
           })
           .pipe(
             tap((resp)=> console.log(resp)),
             tap((resp)=> this.productsCache.set(key, resp))
             )
-    };
-
+    }
     getProductByIdSlug(idSlug: string):Observable<Product>{
 
         if(this.productCache.has(idSlug)){
@@ -60,7 +58,5 @@ export class ProductServiceService {
 
             tap((product)=> this.productCache.set(idSlug, product))
         );
-    
-    }
-    
+    } 
 }
