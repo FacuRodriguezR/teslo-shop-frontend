@@ -56,7 +56,21 @@ export class ProductServiceService {
         .get<Product>(`${baseUrl}/products/${idSlug}`)
         .pipe(
 
-            tap((product)=> this.productCache.set(idSlug, product))
+            tap((product) => this.productCache.set(idSlug, product))
         );
     } 
+
+
+    getProductById(id: string):Observable<Product> {
+        if(this.productCache.has(id)){
+            return of (this.productCache.get(id)!)
+        }
+
+        return this.http
+        .get<Product>(`${baseUrl}/products/${id}`)
+        .pipe(
+
+            tap((product) => this.productCache.set(id, product))
+        );
+    }
 }

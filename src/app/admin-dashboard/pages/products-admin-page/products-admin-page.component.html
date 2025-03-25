@@ -1,9 +1,20 @@
-<h1 class="text-neutral">Listado de productos</h1>
+<h1 class="text-2xl font-bold">Listado de productos</h1>
 
-<h3 class="text-lg text-neutral">Total de productos <span class="text-accent">10</span></h3>
+<h3 class="">Total de productos <span class="text-accent">{{productsResource.value()?.count}}</span></h3>
 
 <div class="divider">
 
 </div>
 
-<product-table [products]="[]"></product-table>
+<div class="flex gap-2 items-center h-20">
+    <shared-pagination [pages]="productsResource.value()?.pages ?? 0" [currentPage]="paginationService.currentPage()"></shared-pagination>
+    
+    <select class="select select-bordered w-32" #selectPerPage (change)="productPerPage.set(+selectPerPage.value)" >
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+    
+</div>
+<product-table [products]="productsResource.value()?.products ?? []"></product-table>
