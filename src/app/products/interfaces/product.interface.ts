@@ -1,3 +1,5 @@
+import { User } from "@auth/interfaces/auth-response.interface";
+
 export interface ProductsResponse {
     count:    number;
     pages:    number;
@@ -15,6 +17,7 @@ export interface Product {
     gender:      Gender;
     tags:        Tag[];
     images:      string[];
+    user:        User;
 
 }
 
