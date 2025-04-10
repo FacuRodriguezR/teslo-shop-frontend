@@ -1,6 +1,6 @@
 export const environment = {
 
-    baseUrl: 'http://localhost:3000/api',
+    baseUrl: 'https://teslo-shop-18ka.onrender.com/api',
     urlAs : 'https://api.redautoshop.com.ar/articulos-view/'
 
 };
